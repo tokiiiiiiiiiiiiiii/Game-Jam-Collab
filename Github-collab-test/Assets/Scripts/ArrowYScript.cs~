@@ -1,0 +1,62 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ArrowYScript : MonoBehaviour
+{
+    public GameObject ArrowY;
+    public static int height = 7;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            ArrowY.transform.position += new Vector3(-1, 0, 0);
+            if (!ValidMove())
+            {
+                ArrowY.transform.position -= new Vector3(-1, 0, 0);
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            ArrowY.transform.position += new Vector3(1, 0, 0);
+            if (!ValidMove())
+            {
+                ArrowY.transform.position -= new Vector3(1, 0, 0);
+            }
+        }
+
+
+
+    }
+
+
+
+    bool ValidMove()//矢印がプレイ範囲外に出ないようにする関数
+    {
+        foreach (Transform children in transform)//Transformクラス内のtransform関数を含む要素に全て適用
+        {
+            int roundedY = Mathf.RoundToInt(children.transform.position.y);
+
+            //テトロミノが負の座標に行こうとする、または、プレイ範囲を越えようとする時、falseを返す
+            if (roundedY < 0 || roundedY >= height)
+            {
+                return false;
+            }
+            /*if (grid[roundedX, roundedY] != null)
+            {
+                return false;
+            }*/
+
+        }
+        return true;
+    }
+}

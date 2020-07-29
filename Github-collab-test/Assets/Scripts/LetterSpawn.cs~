@@ -1,0 +1,32 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class LetterSpawn : MonoBehaviour
+{
+    public GameObject[] Blocks;
+    public static int width = 6;
+    public static int height = 6;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                SpawnBlock(i, j);
+            }
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    void SpawnBlock(int i, int j)
+    {
+        Instantiate(Blocks[Random.Range(0, Blocks.Length)], new Vector3(i,j,0), Quaternion.identity);
+    }
+}
